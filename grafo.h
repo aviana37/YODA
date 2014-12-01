@@ -6,6 +6,7 @@
 extern "C"{
 #include <stdio.h>
 #include <stddef.h>
+#include <limits.h>
 }
 
 struct Grafo

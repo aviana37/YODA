@@ -39,6 +39,7 @@
 		<Unit filename="grafo.h" />
 		<Unit filename="heap.cpp" />
 		<Unit filename="heap.h" />
+		<Unit filename="kruskal.cpp" />
 		<Unit filename="kruskal.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>

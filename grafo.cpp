@@ -130,10 +130,16 @@ void ImprimirGrafo(Grafo* grafo)
                "VERTICE\t|PESO\t|ANTERIOR |TROPAS\n");
 
         for(int c=0; c<grafo->nv; c++)
+        {
+            if(grafo->v[c].peso == INT_MAX)
+                printf("%d\t| \u221E\t| %d\t  | %d\n", c,
+                       grafo->v[c].ant, grafo->v[c].tropas);
+            else
             printf("%d\t| %d\t| %d\t  | %d\n",
                    c, grafo->v[c].peso,
                    grafo->v[c].ant,
                    grafo->v[c].tropas);
+        }
 
         printf("\n");
 

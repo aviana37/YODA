@@ -3,10 +3,6 @@
 #include "dijkstra.h"
 #include "cronometro.h"
 
-extern "C" {
-#include <stdio.h>
-}
-
 #define GALAXIA_100txt "UNIVERSO/galaxia_100.txt"
 #define GALAXIA_10txt  "UNIVERSO/galaxia_10.txt"
 #define GALAXIA_20txt  "UNIVERSO/galaxia_20.txt"
@@ -49,8 +45,8 @@ COMANDO_MENU MenuCarregar();
 COMANDO_MENU MenuPrincipal();
 COMANDO_MENU MenuExecutar(const char*, const char*);
 
-void ExecutarAlgoritmoKruskal(Grafo***, COMANDO_MENU);
-void ExecutarAlgoritmoDijkstra(Grafo***, COMANDO_MENU);
+void ExecutarAlgoritmoKruskal(Grafo**&, COMANDO_MENU);
+void ExecutarAlgoritmoDijkstra(Grafo**&, COMANDO_MENU);
 void DescarregarGrafo(Grafo**&, COMANDO_MENU);
 void CarregarGrafo(Grafo**&, COMANDO_MENU);
 
@@ -197,13 +193,68 @@ COMANDO_MENU MenuExecutar(const char* tarefa, const char* verbo)
         }
     }
 }
-void ExecutarAlgoritmoKruskal(Grafo*** g, COMANDO_MENU qual)
+void ExecutarAlgoritmoKruskal(Grafo** &g, COMANDO_MENU qual)
 {
 
 }
-void ExecutarAlgoritmoDijkstra(Grafo*** g, COMANDO_MENU qual)
+void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
 {
-
+    //Faz a chamada da execução do algoritmo de acordo com o comando especificado.
+    if(qual == CM_TODOS || qual == CM_GALAXIA_5)
+    {
+        if(g[GALAXIA_5])
+        {
+        printf("Executando algoritmo de Dijkstra no grafo Galaxia 5... ");
+        Dijkstra(g[GALAXIA_5]);
+        printf("Pronto.\n");
+        }
+        else
+            printf("Grafo Galaxia 5 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_10)
+    {
+        if(g[GALAXIA_10])
+        {
+            printf("Executando algoritmo de Dijkstra no grafo Galaxia 10... ");
+            Dijkstra(g[GALAXIA_10]);
+            printf("Pronto.\n");
+        }
+        else
+            printf("Grafo Galaxia 10 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_20)
+    {
+        if(g[GALAXIA_20])
+        {
+            printf("Executando algoritmo de Dijkstra no grafo Galaxia 20... ");
+            Dijkstra(g[GALAXIA_20]);
+            printf("Pronto.\n");
+        }
+        else
+            printf("Grafo Galaxia 20 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_50)
+    {
+        if(g[GALAXIA_50])
+        {
+            printf("Executando algoritmo de Dijkstra no grafo Galaxia 50... ");
+            Dijkstra(g[GALAXIA_50]);
+            printf("Pronto.\n");
+        }
+        else
+            printf("Grafo Galaxia 50 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_100)
+    {
+        if(g[GALAXIA_100])
+        {
+            printf("Executando algoritmo de Dijkstra no grafo Galaxia 100... ");
+            Dijkstra(g[GALAXIA_100]);
+            printf("Pronto.\n");
+        }
+        else
+            printf("Grafo Galaxia 100 nao esta carregado.\n");
+    }
 }
 void DescarregarGrafo(Grafo** &g, COMANDO_MENU qual)
 {
@@ -559,7 +610,7 @@ int main()
             {
             case CM_AGM:
                 c=MenuExecutar("executar o algoritmo de Kruskal em", "Calcular");
-                if(c!=CM_SAIR) {}
+                if(c!=CM_SAIR){}
                 else c=CM_DESCONHECIDO;
                 break;
 
@@ -571,7 +622,11 @@ int main()
 
             case CM_DIJKSTRA:
                 c=MenuExecutar("executar o algoritmo de Dijkstra em", "Calcular");
-                if(c!=CM_SAIR) {}
+                if(c!=CM_SAIR)
+                {
+                    ExecutarAlgoritmoDijkstra(grafo, c);
+                    printf("\n");
+                }
                 else c=CM_DESCONHECIDO;
                 break;
 
