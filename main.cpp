@@ -33,6 +33,7 @@ enum COMANDO_MENU
     CM_GALAXIA_50,
     CM_GALAXIA_5,
     CM_TODOS,
+    CM_TODOS_SEM_VERBOSE,
 
     CM_AGM,
     CM_DIJKSTRA,
@@ -65,7 +66,7 @@ COMANDO_MENU MenuInicial()
     {
         printf("Selecione uma das opcoes abaixo:\n"
                "1-Carregar grafo.\n"
-               "2-Sair.\n");
+               "2-Sair.\n>> ");
 
         scanf("%d", &e);
 
@@ -92,7 +93,7 @@ COMANDO_MENU MenuCarregar()
                "4-Carregar arquivo \"%s\".\n"
                "5-Carregar arquivo \"%s\".\n"
                "6-Carregar arquivo \"%s\".\n"
-               "7-Voltar.\n",
+               "7-Voltar.\n>> ",
                GALAXIA_5txt, GALAXIA_10txt, GALAXIA_20txt, GALAXIA_50txt, GALAXIA_100txt);
 
         scanf("%d", &e);
@@ -131,7 +132,7 @@ COMANDO_MENU MenuPrincipal()
                "4-Imprimir grafo.\n"
                "5-Carregar grafo.\n"
                "6-Descarregar grafo.\n"
-               "7-Sair.\n");
+               "7-Sair.\n>> ");
 
         scanf("%d", &e);
         switch(e)
@@ -163,13 +164,14 @@ COMANDO_MENU MenuExecutar(const char* tarefa, const char* verbo)
     {
         printf("Deseja %s qual(is) grafo(s)?\n"
                "1-%s todos os grafos.\n"
-               "2-%s somente no grafo Galaxia 5.\n"
-               "3-%s somente no grafo Galaxia 10.\n"
-               "4-%s somente no grafo Galaxia 20.\n"
-               "5-%s somente no grafo Galaxia 50.\n"
-               "6-%s somente no grafo Galaxia 100.\n"
-               "7-Voltar.\n", tarefa, verbo, verbo,
-               verbo, verbo, verbo, verbo);
+               "2-%s todos os grafos SEM VERBOSE.\n"
+               "3-%s somente no grafo Galaxia 5.\n"
+               "4-%s somente no grafo Galaxia 10.\n"
+               "5-%s somente no grafo Galaxia 20.\n"
+               "6-%s somente no grafo Galaxia 50.\n"
+               "7-%s somente no grafo Galaxia 100.\n"
+               "8-Voltar.\n>> ", tarefa, verbo, verbo,
+               verbo, verbo, verbo, verbo, verbo);
 
         scanf("%d", &e);
         switch(e)
@@ -177,16 +179,18 @@ COMANDO_MENU MenuExecutar(const char* tarefa, const char* verbo)
         case 1:
             return CM_TODOS;
         case 2:
-            return CM_GALAXIA_5;
+            return CM_TODOS_SEM_VERBOSE;
         case 3:
-            return CM_GALAXIA_10;
+            return CM_GALAXIA_5;
         case 4:
-            return CM_GALAXIA_20;
+            return CM_GALAXIA_10;
         case 5:
-            return CM_GALAXIA_50;
+            return CM_GALAXIA_20;
         case 6:
-            return CM_GALAXIA_100;
+            return CM_GALAXIA_50;
         case 7:
+            return CM_GALAXIA_100;
+        case 8:
             return CM_SAIR;
         default:
             printf("Entrada nao reconhecida. Por favor, tente novamente.\n\n");
@@ -195,18 +199,28 @@ COMANDO_MENU MenuExecutar(const char* tarefa, const char* verbo)
 }
 void ExecutarAlgoritmoKruskal(Grafo** &g, COMANDO_MENU qual)
 {
+    //Faz a chamada da execução do algoritmo de Kruskal de acordo com o comando especificado.
+    if(!g)
+    {
+        printf("Nenhum grafo esta carregado.\n");
+        return;
+    }
 
-}
-void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
-{
-    //Faz a chamada da execução do algoritmo de acordo com o comando especificado.
+    bool verbose=true;
+    if(qual==CM_TODOS_SEM_VERBOSE)
+    {
+        verbose=false;
+        qual = CM_TODOS;
+    }
+
     if(qual == CM_TODOS || qual == CM_GALAXIA_5)
     {
         if(g[GALAXIA_5])
         {
-        printf("Executando algoritmo de Dijkstra no grafo Galaxia 5... ");
-        Dijkstra(g[GALAXIA_5]);
-        printf("Pronto.\n");
+            printf("Executando algoritmo de Kruskal no grafo Galaxia 5.\n");
+            IniciarCronometro();
+            Kruskal(g[GALAXIA_5], verbose);
+            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 5 nao esta carregado.\n");
@@ -215,9 +229,10 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
     {
         if(g[GALAXIA_10])
         {
-            printf("Executando algoritmo de Dijkstra no grafo Galaxia 10... ");
-            Dijkstra(g[GALAXIA_10]);
-            printf("Pronto.\n");
+            printf("Executando algoritmo de Kruskal no grafo Galaxia 10.\n");
+            IniciarCronometro();
+            Kruskal(g[GALAXIA_10], verbose);
+            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 10 nao esta carregado.\n");
@@ -226,9 +241,10 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
     {
         if(g[GALAXIA_20])
         {
-            printf("Executando algoritmo de Dijkstra no grafo Galaxia 20... ");
-            Dijkstra(g[GALAXIA_20]);
-            printf("Pronto.\n");
+            printf("Executando algoritmo de Kruskal no grafo Galaxia 20.\n");
+            IniciarCronometro();
+            Kruskal(g[GALAXIA_20], verbose);
+            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 20 nao esta carregado.\n");
@@ -237,9 +253,10 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
     {
         if(g[GALAXIA_50])
         {
-            printf("Executando algoritmo de Dijkstra no grafo Galaxia 50... ");
-            Dijkstra(g[GALAXIA_50]);
-            printf("Pronto.\n");
+            printf("Executando algoritmo de Kruskal no grafo Galaxia 50.\n");
+            IniciarCronometro();
+            Kruskal(g[GALAXIA_50], verbose);
+            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 50 nao esta carregado.\n");
@@ -248,9 +265,87 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
     {
         if(g[GALAXIA_100])
         {
-            printf("Executando algoritmo de Dijkstra no grafo Galaxia 100... ");
-            Dijkstra(g[GALAXIA_100]);
-            printf("Pronto.\n");
+            printf("Executando algoritmo de Kruskal no grafo Galaxia 100.\n");
+            IniciarCronometro();
+            Kruskal(g[GALAXIA_100], verbose);
+            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+        }
+        else
+            printf("Grafo Galaxia 100 nao esta carregado.\n");
+    }
+}
+void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
+{
+    //Faz a chamada da execução do algoritmo de Dijkstra de acordo com o comando especificado.
+    if(!g)
+    {
+        printf("Nenhum grafo esta carregado.\n");
+        return;
+    }
+
+    bool verbose=true;
+    if(qual==CM_TODOS_SEM_VERBOSE)
+    {
+        verbose=false;
+        qual = CM_TODOS;
+    }
+
+    if(qual == CM_TODOS || qual == CM_GALAXIA_5)
+    {
+        if(g[GALAXIA_5])
+        {
+            printf("Executando algoritmo de Dijkstra no grafo Galaxia 5.\n");
+            IniciarCronometro();
+            Dijkstra(g[GALAXIA_5], verbose);
+            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+        }
+        else
+            printf("Grafo Galaxia 5 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_10)
+    {
+        if(g[GALAXIA_10])
+        {
+            printf("Executando algoritmo de Dijkstra no grafo Galaxia 10.\n");
+            IniciarCronometro();
+            Dijkstra(g[GALAXIA_10], verbose);
+            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+        }
+        else
+            printf("Grafo Galaxia 10 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_20)
+    {
+        if(g[GALAXIA_20])
+        {
+            printf("Executando algoritmo de Dijkstra no grafo Galaxia 20.\n");
+            IniciarCronometro();
+            Dijkstra(g[GALAXIA_20], verbose);
+            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+        }
+        else
+            printf("Grafo Galaxia 20 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_50)
+    {
+        if(g[GALAXIA_50])
+        {
+            printf("Executando algoritmo de Dijkstra no grafo Galaxia 50.\n");
+            IniciarCronometro();
+            Dijkstra(g[GALAXIA_50], verbose);
+            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+        }
+        else
+            printf("Grafo Galaxia 50 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_100)
+    {
+        if(g[GALAXIA_100])
+        {
+            printf("Executando algoritmo de Dijkstra no grafo Galaxia 100.\n");
+            IniciarCronometro();
+            Dijkstra(g[GALAXIA_100], verbose);
+            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 100 nao esta carregado.\n");
@@ -264,6 +359,9 @@ void DescarregarGrafo(Grafo** &g, COMANDO_MENU qual)
         printf("Nenhum grafo esta carregado.\n");
         return;
     }
+
+    if(qual==CM_TODOS_SEM_VERBOSE)
+        qual = CM_TODOS;
 
     if(qual==CM_GALAXIA_5 || qual==CM_TODOS)
     {
@@ -338,6 +436,9 @@ void DescarregarGrafo(Grafo** &g, COMANDO_MENU qual)
 
 void CarregarGrafo(Grafo** &grafo, COMANDO_MENU qual)
 {
+    if(qual==CM_TODOS_SEM_VERBOSE)
+        qual = CM_TODOS;
+
     if(qual==CM_GALAXIA_5 || qual==CM_TODOS)
     {
         if(!grafo)
@@ -521,6 +622,9 @@ void CarregarGrafo(Grafo** &grafo, COMANDO_MENU qual)
 
 void ImprimirGalaxias(Grafo** g, COMANDO_MENU c)
 {
+    if(c==CM_TODOS_SEM_VERBOSE)
+        c = CM_TODOS;
+
     if(g)
     {
         if(c==CM_GALAXIA_5 || c==CM_TODOS)
@@ -537,7 +641,7 @@ void ImprimirGalaxias(Grafo** g, COMANDO_MENU c)
             if(g[GALAXIA_10])
                 ImprimirGrafo(g[GALAXIA_10]);
             else printf("Nada a ser imprimido.\n");
-                printf("Pronto.\n");
+            printf("Pronto.\n");
         }
         if(c==CM_GALAXIA_20 || c==CM_TODOS)
         {
@@ -565,6 +669,8 @@ void ImprimirGalaxias(Grafo** g, COMANDO_MENU c)
         }
     }
 }
+
+
 int main()
 {
     //Inicializando variáveis do programa.
@@ -610,7 +716,11 @@ int main()
             {
             case CM_AGM:
                 c=MenuExecutar("executar o algoritmo de Kruskal em", "Calcular");
-                if(c!=CM_SAIR){}
+                if(c!=CM_SAIR)
+                {
+                    ExecutarAlgoritmoKruskal(grafo, c);
+                    printf("\n");
+                }
                 else c=CM_DESCONHECIDO;
                 break;
 

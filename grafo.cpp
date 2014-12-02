@@ -45,6 +45,7 @@ Grafo::Grafo()
 {
     a=NULL;
     v=NULL;
+    a_agm=NULL;
     nv=0;
     na=0;
 }
@@ -54,8 +55,30 @@ Grafo::~Grafo()
         delete [] v;
     if(a)
         delete [] a;
+    if(a_agm)
+        delete a_agm;
 }
-
+void Grafo::AdicionarArestaAGM(Aresta aresta)
+{
+    if(!a_agm)
+        a_agm=new std::vector<Aresta>;
+    a_agm->push_back(aresta);
+}
+bool Grafo::ProximaArestaAGM(Grafo::Aresta* aresta)
+{
+    static int atual=-1;
+    if(aresta && a_agm)
+    {
+        atual++;
+        if(atual>=a_agm->size())
+            return false;
+        *aresta=a_agm->at(atual);
+        return true;
+    }
+    if(!a_agm)
+        atual=-1;
+    return false;
+}
 
 Grafo* CarregarArquivo(const char* arquivo)
 {
@@ -87,7 +110,6 @@ Grafo* CarregarArquivo(const char* arquivo)
         //Contando a quantidade de arestas.
         fgetpos(file, &pos);
         ret->na=-1;
-
         while(true)
         {
             c=fgetc(file);
@@ -135,10 +157,10 @@ void ImprimirGrafo(Grafo* grafo)
                 printf("%d\t| \u221E\t| %d\t  | %d\n", c,
                        grafo->v[c].ant, grafo->v[c].tropas);
             else
-            printf("%d\t| %d\t| %d\t  | %d\n",
-                   c, grafo->v[c].peso,
-                   grafo->v[c].ant,
-                   grafo->v[c].tropas);
+                printf("%d\t| %d\t| %d\t  | %d\n",
+                       c, grafo->v[c].peso,
+                       grafo->v[c].ant,
+                       grafo->v[c].tropas);
         }
 
         printf("\n");
@@ -151,13 +173,22 @@ void ImprimirGrafo(Grafo* grafo)
                    grafo->a[c].origem,
                    grafo->a[c].destino,
                    grafo->a[c].peso);
+
+        printf("\n");
+
+        if(grafo->a_agm)
+        {
+            printf("Arestas da arvore geradora minima:\n"
+                   "ORIGEM\t|DESTINO |DISTANCIA\n");
+
+            for(int c=0; c<grafo->a_agm->size(); c++)
+                printf("%d\t| %d\t | %d\n",
+                       grafo->a_agm->at(c).origem,
+                       grafo->a_agm->at(c).destino,
+                       grafo->a_agm->at(c).peso);
+        }
+        else
+            printf("Arvore geradora minima nao calculada.\n");
     }
 }
 
-void ImprimirCentro(Grafo* grafo)
-{
-    if(grafo)
-    {
-        printf("Imprimindo centro.\n");
-    }
-}

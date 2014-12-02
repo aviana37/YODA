@@ -31,6 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="centro.cpp" />
+		<Unit filename="centro.h" />
 		<Unit filename="cronometro.cpp" />
 		<Unit filename="cronometro.h" />
 		<Unit filename="dijkstra.cpp" />

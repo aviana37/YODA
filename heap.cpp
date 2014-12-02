@@ -6,6 +6,7 @@ bool Heap::Vertice::operator<(Heap::Vertice outro)
         return true;
     return false;
 }
+
 Heap::Heap(Grafo::Vertice* vertices, int n)
 {
     this->n = n;

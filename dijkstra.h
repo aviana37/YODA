@@ -4,6 +4,6 @@
 #include "grafo.h"
 #include "heap.h"
 
-void Dijkstra(Grafo* &grafo, bool verbose=true);
+void Dijkstra(Grafo* &grafo, bool verbose);
 
 #endif // DIJKSTRA_H_INCLUDED

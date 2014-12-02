@@ -17,7 +17,7 @@ struct Grafo
             destino;
 
         int peso;
-        int Comparador(const void*, const void*);
+        static int Comparador(const void*, const void*);
     };
     struct Vertice
     {
@@ -36,19 +36,19 @@ struct Grafo
 
     Vertice* v;
     Aresta* a;
+    std::vector<Aresta>* a_agm;
     int nv;
     int na;
 
-
-//  Grafo(int n_vertices, int* peso_vertices, int n_arestas, Aresta* arestas);
     Grafo();
     ~Grafo();
+
+    void AdicionarArestaAGM(Aresta aresta);
+    bool ProximaArestaAGM(Aresta* aresta);
 };
 
 Grafo* CarregarArquivo(const char*);
 
 void ImprimirGrafo(Grafo*);
-void ImprimirCentro(Grafo*);
-
 
 #endif // GRAFO_H_INCLUDED
