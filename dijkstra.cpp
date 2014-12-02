@@ -76,7 +76,7 @@ void Dijkstra(Grafo* &grafo, bool verbose)
                         {
                             if(verbose)
                                 printf("Removendo aresta %d -> %d da arvore geradora minima.\n", e.origem, e.destino);
-                            grafo->a_agm->erase(grafo->a_agm->begin() + inc);
+                            grafo->a_agm->at(inc).origem = u;
                             break;
                         }
                         inc++;
