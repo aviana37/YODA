@@ -1,6 +1,7 @@
 #include "grafo.h"
 #include "kruskal.h"
 #include "dijkstra.h"
+#include "centro.h"
 #include "cronometro.h"
 
 #define GALAXIA_100txt "UNIVERSO/galaxia_100.txt"
@@ -48,6 +49,7 @@ COMANDO_MENU MenuExecutar(const char*, const char*);
 
 void ExecutarAlgoritmoKruskal(Grafo**&, COMANDO_MENU);
 void ExecutarAlgoritmoDijkstra(Grafo**&, COMANDO_MENU);
+void ExecutarAlgoritmoCentro(Grafo**, COMANDO_MENU);
 void DescarregarGrafo(Grafo**&, COMANDO_MENU);
 void CarregarGrafo(Grafo**&, COMANDO_MENU);
 
@@ -346,6 +348,152 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
             IniciarCronometro();
             Dijkstra(g[GALAXIA_100], verbose);
             printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+        }
+        else
+            printf("Grafo Galaxia 100 nao esta carregado.\n");
+    }
+}
+void ExecutarAlgoritmoCentro(Grafo** g, COMANDO_MENU qual)
+{
+    if(!g)
+    {
+        printf("Nenhum grafo esta carregado.\n");
+        return;
+    }
+
+    bool verbose=true;
+    if(qual==CM_TODOS_SEM_VERBOSE)
+    {
+        verbose=false;
+        qual = CM_TODOS;
+    }
+
+    if(qual == CM_TODOS || qual == CM_GALAXIA_5)
+    {
+        if(g[GALAXIA_5])
+        {
+            if(g[GALAXIA_5]->a_agm)
+            {
+                printf("Determinando centro da AGM do grafo Galaxia 5.\n");
+                Centro* c;
+                int e;
+
+                IniciarCronometro();
+
+                c=DeterminarCentro(g[GALAXIA_5], verbose);
+                printf("Vertices centrais: ");
+                while(c->ProximoVertice(&e))
+                    printf("%d ", e);
+
+                printf("\nPronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+                delete c;
+            }
+            else
+                printf("E necessario calcular a AGM deste grafo atraves dos algoritmos de Kruskal ou Dijkstra para ser possivel determinar o centro da Arvore Geradora Minima.\n");
+        }
+        else
+            printf("Grafo Galaxia 5 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_10)
+    {
+        if(g[GALAXIA_10])
+        {
+            if(g[GALAXIA_10]->a_agm)
+            {
+                printf("Determinando centro da AGM do grafo Galaxia 10.\n");
+                Centro* c;
+                int e;
+
+                IniciarCronometro();
+
+                c=DeterminarCentro(g[GALAXIA_10], verbose);
+                printf("Vertices centrais: ");
+                while(c->ProximoVertice(&e))
+                    printf("%d ", e);
+
+                printf("\nPronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+                delete c;
+            }
+            else
+                printf("E necessario calcular a AGM deste grafo atraves dos algoritmos de Kruskal ou Dijkstra para ser possivel determinar o centro da Arvore Geradora Minima.\n");
+        }
+        else
+            printf("Grafo Galaxia 10 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_20)
+    {
+        if(g[GALAXIA_20])
+        {
+            if(g[GALAXIA_20]->a_agm)
+            {
+                printf("Determinando centro da AGM do grafo Galaxia 20.\n");
+                Centro* c;
+                int e;
+
+                IniciarCronometro();
+
+                c=DeterminarCentro(g[GALAXIA_20], verbose);
+                printf("Vertices centrais: ");
+                while(c->ProximoVertice(&e))
+                    printf("%d ", e);
+
+                printf("\nPronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+                delete c;
+            }
+            else
+                printf("E necessario calcular a AGM deste grafo atraves dos algoritmos de Kruskal ou Dijkstra para ser possivel determinar o centro da Arvore Geradora Minima.\n");
+        }
+        else
+            printf("Grafo Galaxia 20 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_50)
+    {
+        if(g[GALAXIA_50])
+        {
+            if(g[GALAXIA_50]->a_agm)
+            {
+                printf("Determinando centro da AGM do grafo Galaxia 50.\n");
+                Centro* c;
+                int e;
+
+                IniciarCronometro();
+
+                c=DeterminarCentro(g[GALAXIA_50], verbose);
+                printf("Vertices centrais: ");
+                while(c->ProximoVertice(&e))
+                    printf("%d ", e);
+
+                printf("\nPronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+                delete c;
+            }
+            else
+                printf("E necessario calcular a AGM deste grafo atraves dos algoritmos de Kruskal ou Dijkstra para ser possivel determinar o centro da Arvore Geradora Minima.\n");
+        }
+        else
+            printf("Grafo Galaxia 50 nao esta carregado.\n");
+    }
+    if(qual == CM_TODOS || qual == CM_GALAXIA_100)
+    {
+        if(g[GALAXIA_100])
+        {
+            if(g[GALAXIA_100]->a_agm)
+            {
+                printf("Determinando centro da AGM do grafo Galaxia 100.\n");
+                Centro* c;
+                int e;
+
+                IniciarCronometro();
+
+                c=DeterminarCentro(g[GALAXIA_100], verbose);
+                printf("Vertices centrais: ");
+                while(c->ProximoVertice(&e))
+                    printf("%d ", e);
+
+                printf("\nPronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+                delete c;
+            }
+            else
+                printf("E necessario calcular a AGM deste grafo atraves dos algoritmos de Kruskal ou Dijkstra para ser possivel determinar o centro da Arvore Geradora Minima.\n");
         }
         else
             printf("Grafo Galaxia 100 nao esta carregado.\n");
@@ -726,7 +874,11 @@ int main()
 
             case CM_CENTRO:
                 c=MenuExecutar("determinar o centro da Arvore Geradora Minima de", "Calcular");
-                if(c!=CM_SAIR) {}
+                if(c!=CM_SAIR)
+                {
+                    ExecutarAlgoritmoCentro(grafo, c);
+                    printf("\n");
+                }
                 else c=CM_DESCONHECIDO;
                 break;
 

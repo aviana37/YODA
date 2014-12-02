@@ -45,7 +45,7 @@ void Kruskal(Grafo* &grafo, bool verbose)
                 //e adicionar aresta à Árvore Geradora Mínima do grafo.
                 vd[grafo->a[atual].origem] = true;
                 grafo->AdicionarArestaAGM(grafo->a[atual]);
-                grafo->vd[grafo->a[atual].destino].ant = grafo->a[atual].origem;
+                grafo->v[grafo->a[atual].destino].ant = grafo->a[atual].origem;
 
                 if(verbose)
                     printf("Aresta e minima, e nao forma ciclo.\n"

@@ -75,7 +75,7 @@ bool Grafo::ProximaArestaAGM(Grafo::Aresta* aresta)
         *aresta=a_agm->at(atual);
         return true;
     }
-    if(!a_agm)
+    if(!aresta)
         atual=-1;
     return false;
 }

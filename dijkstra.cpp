@@ -4,6 +4,9 @@ void Dijkstra(Grafo* &grafo, bool verbose)
 {
     if(grafo)
     {
+        if(verbose)
+            printf("Inicializando variaveis.\n");
+
         Heap* heap;
         int u, v;
         Grafo::Aresta buff;
@@ -14,12 +17,22 @@ void Dijkstra(Grafo* &grafo, bool verbose)
             grafo->v[c].ant = -1;
         }
 
+        if(grafo->a_agm)
+        {
+            delete grafo->a_agm;
+            grafo->a_agm;
+        }
+
+        if(verbose)
+            printf("Construindo heap. ");
+
         grafo->v[0].peso = 0;
         heap = new Heap(grafo->v, grafo->nv);
 
         if(verbose)
         {
-            printf("\nHEAP INICIAL:\n");
+            printf("Pronto.\n");
+            printf("HEAP INICIAL:\n");
             heap->ImprimirEstado();
             printf("\n");
         }
@@ -49,9 +62,30 @@ void Dijkstra(Grafo* &grafo, bool verbose)
                             printf("O vertice %d (\u221E) tem peso maior que %d + %d.\n", v, grafo->v[u].peso, buff.peso);
                         printf("Vertice %d recebe peso %d.\n", v, grafo->v[u].peso + buff.peso);
                     }
+
                     grafo->v[v].ant = u;
                     grafo->v[v].peso = grafo->v[u].peso + buff.peso;
                     heap->AtualizarVertice(v, grafo->v[u].peso + buff.peso);
+
+                    int inc=0;
+                    Grafo::Aresta e;
+                    grafo->ProximaArestaAGM(NULL);
+                    while(grafo->ProximaArestaAGM(&e))
+                    {
+                        if(e.destino == buff.destino)
+                        {
+                            if(verbose)
+                                printf("Removendo aresta %d -> %d da arvore geradora minima.\n", e.origem, e.destino);
+                            grafo->a_agm->erase(grafo->a_agm->begin() + inc);
+                            break;
+                        }
+                        inc++;
+                    }
+
+                    if(verbose)
+                        printf("Adicionando aresta %d -> %d a arvore geradora minima.\n", buff.origem, buff.destino);
+                    grafo->AdicionarArestaAGM(buff);
+
 
                     if(verbose)
                     {
