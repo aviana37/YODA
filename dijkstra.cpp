@@ -19,6 +19,7 @@ void Dijkstra(Grafo* &grafo, bool verbose)
         if(verbose)
             printf("Inicializando variaveis.\n");
 
+        //Inicializando variáveis.
         Heap* heap;
         int u, v;
         Grafo::Aresta buff;
@@ -29,6 +30,7 @@ void Dijkstra(Grafo* &grafo, bool verbose)
             grafo->v[c].ant = -1;
         }
 
+        //Removendo a AGM do grafo caso ela exista.
         if(grafo->a_agm)
         {
             delete grafo->a_agm;
@@ -38,7 +40,10 @@ void Dijkstra(Grafo* &grafo, bool verbose)
         if(verbose)
             printf("Construindo heap. ");
 
+        //Atribuindo peso zero à raiz.
         grafo->v[0].peso = 0;
+
+        //Construindo heap.
         heap = new Heap(grafo->v, grafo->nv);
 
         if(verbose)
@@ -49,13 +54,16 @@ void Dijkstra(Grafo* &grafo, bool verbose)
             printf("\n");
         }
 
+        //Enquanto o heap não estiver vazio.
         while(!heap->Vazio())
         {
+            //Retirar vértice mínimo.
             u=heap->RetirarMinimo();
 
             if(verbose)
                 printf("Verificando arestas de %d:\n", u);
 
+            //Processar arestas do vértice mínimo.
             grafo->v[u].ProximaArestaAdj(NULL);
             while(grafo->v[u].ProximaArestaAdj(&buff))
             {
@@ -63,6 +71,8 @@ void Dijkstra(Grafo* &grafo, bool verbose)
                 if(verbose)
                     printf("Comparando aresta %d -> %d.\n", u, v);
 
+                //Se o peso de algum dos vértices adjacentes ao vértice mínimo for maior que o peso do
+                // vértice mínimo + o peso da aresta
                 if(grafo->v[v].peso > (grafo->v[u].peso + buff.peso))
                 {
                     if(verbose)
@@ -75,11 +85,19 @@ void Dijkstra(Grafo* &grafo, bool verbose)
                         printf("Vertice %d recebe peso %d.\n", v, grafo->v[u].peso + buff.peso);
                     }
 
+                    //O vértice adjacente é descoberto pelo vértice mínimo na AGM.
                     grafo->v[v].ant = u;
+
+                    //O vértice adjacente recebe peso igual ao peso do vértice mínimo mais o da aresta ligando os dois.
                     grafo->v[v].peso = grafo->v[u].peso + buff.peso;
+
+                    //O vértice adjacente tem seu peso atualizado no heap, e o heap se reconstroi.
                     heap->AtualizarVertice(v, grafo->v[u].peso + buff.peso);
 
+
+                    //Caso alguma aresta antiga da AGM tenha conflito com nova, é feita uma substituição.
                     int inc=0;
+                    bool sub=false;
                     Grafo::Aresta e;
                     grafo->ProximaArestaAGM(NULL);
                     while(grafo->ProximaArestaAGM(&e))
@@ -89,6 +107,7 @@ void Dijkstra(Grafo* &grafo, bool verbose)
                             if(verbose)
                                 printf("Removendo aresta %d -> %d da arvore geradora minima.\n", e.origem, e.destino);
                             grafo->a_agm->at(inc).origem = u;
+                            sub=true;
                             break;
                         }
                         inc++;
@@ -96,7 +115,10 @@ void Dijkstra(Grafo* &grafo, bool verbose)
 
                     if(verbose)
                         printf("Adicionando aresta %d -> %d a arvore geradora minima.\n", buff.origem, buff.destino);
-                    grafo->AdicionarArestaAGM(buff);
+
+                    //Se nenhuma aresta foi substituída, adicionar a nova aresta à AGM.
+                    if(!sub)
+                        grafo->AdicionarArestaAGM(buff);
 
 
                     if(verbose)

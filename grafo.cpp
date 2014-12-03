@@ -13,6 +13,10 @@
 
 int Grafo::Aresta::Comparador(const void* a, const void* b)
 {
+    //Retorna 1 se a>b;
+    //Retorna -1 se a<b;
+    //Retorna 0 se a==b;
+
     Aresta* aa = (Aresta*) a;
     Aresta* bb = (Aresta*) b;
     return (aa->peso - bb->peso);
@@ -26,6 +30,9 @@ void Grafo::Vertice::AdicionarArestaAdj(Grafo::Aresta a_adj)
 }
 bool Grafo::Vertice::ProximaArestaAdj(Grafo::Aresta* a_adj)
 {
+    //Iterar pela próxima aresta do vector ou inicializar o iterador
+    // se a_adj == NULL.
+
     static int atual=-1;
     if(adj && a_adj)
     {
@@ -77,6 +84,9 @@ void Grafo::AdicionarArestaAGM(Aresta aresta)
 }
 bool Grafo::ProximaArestaAGM(Grafo::Aresta* aresta)
 {
+    //Iterar pela próxima aresta do vector ou inicializar o iterador
+    // se aresta == NULL.
+
     static int atual=-1;
     if(aresta && a_agm)
     {
@@ -159,6 +169,7 @@ void ImprimirGrafo(Grafo* grafo)
 {
     if(grafo)
     {
+        //Imprimindo vértices do grafo.
         printf("Vertices:\n"
                "VERTICE\t|PESO\t|ANTERIOR |TROPAS\n");
 
@@ -176,6 +187,7 @@ void ImprimirGrafo(Grafo* grafo)
 
         printf("\n");
 
+        //Imprimindo arestas do grafo.
         printf("Arestas:\n"
                "ORIGEM\t|DESTINO |DISTANCIA\n");
 
@@ -187,8 +199,10 @@ void ImprimirGrafo(Grafo* grafo)
 
         printf("\n");
 
+        //Se o grafo ter uma AGM.
         if(grafo->a_agm)
         {
+            //Imprimir árvore geradora mínima.
             printf("Arestas da arvore geradora minima:\n"
                    "ORIGEM\t|DESTINO |DISTANCIA\n");
 

@@ -22,6 +22,7 @@ void IniciarCronometro()
 }
 float TerminarCronometro()
 {
+    //Retorna a quantidade de segundos passados após a última chamada de IniciarCronometro().
     chrono = clock() - chrono;
     return ((float) chrono/CLOCKS_PER_SEC);
 }

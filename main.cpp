@@ -198,6 +198,7 @@ int main();
 COMANDO_MENU MenuInicial()
 {
     int e;
+    //Repetir o menu N vezes até que o usuário dê uma resposta válida.
     while(true)
     {
         printf("Selecione uma das opcoes abaixo:\n"
@@ -220,6 +221,7 @@ COMANDO_MENU MenuInicial()
 COMANDO_MENU MenuCarregar()
 {
     int e;
+    //Repetir o menu N vezes até que o usuário dê uma resposta válida.
     while(true)
     {
         printf("Deseja carregar os grafos a partir de qual(is) arquivo(s)?\n"
@@ -259,6 +261,7 @@ COMANDO_MENU MenuCarregar()
 COMANDO_MENU MenuPrincipal()
 {
     int e;
+    //Repetir o menu N vezes até que o usuário dê uma resposta válida.
     while(true)
     {
         printf("--MENU_PRINCIPAL--\n"
@@ -296,6 +299,7 @@ COMANDO_MENU MenuPrincipal()
 COMANDO_MENU MenuExecutar(const char* tarefa, const char* verbo)
 {
     int e;
+    //Repetir o menu N vezes até que o usuário dê uma resposta válida.
     while(true)
     {
         printf("Deseja %s qual(is) grafo(s)?\n"
@@ -343,6 +347,7 @@ void ExecutarAlgoritmoKruskal(Grafo** &g, COMANDO_MENU qual)
     }
 
     bool verbose=true;
+    //Alterar o valor de verbose se necessário.
     if(qual==CM_TODOS_SEM_VERBOSE)
     {
         verbose=false;
@@ -420,6 +425,7 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
     }
 
     bool verbose=true;
+    //Alterar o valor de verbose se necessário.
     if(qual==CM_TODOS_SEM_VERBOSE)
     {
         verbose=false;
@@ -496,12 +502,14 @@ void ExecutarAlgoritmoCentro(Grafo** g, COMANDO_MENU qual)
     }
 
     bool verbose=true;
+    //Alterar o valor de verbose se necessário.
     if(qual==CM_TODOS_SEM_VERBOSE)
     {
         verbose=false;
         qual = CM_TODOS;
     }
 
+    //Calcular o centro das galáxias especificadas.
     if(qual == CM_TODOS || qual == CM_GALAXIA_5)
     {
         if(g[GALAXIA_5])
@@ -718,6 +726,7 @@ void DescarregarGrafo(Grafo** &g, COMANDO_MENU qual)
 
 void CarregarGrafo(Grafo** &grafo, COMANDO_MENU qual)
 {
+    //Carregar todas as galáxias especificadas.
     if(qual==CM_TODOS_SEM_VERBOSE)
         qual = CM_TODOS;
 
@@ -904,8 +913,9 @@ void CarregarGrafo(Grafo** &grafo, COMANDO_MENU qual)
 
 void ImprimirGalaxias(Grafo** g, COMANDO_MENU c)
 {
+    //Imprimir todas as galáxias especificadas.
     if(c==CM_TODOS_SEM_VERBOSE)
-        c = CM_TODOS;
+        return;
 
     if(g)
     {
@@ -958,9 +968,6 @@ int main()
     //Inicializando variáveis do programa.
     COMANDO_MENU c=CM_DESCONHECIDO;
     Grafo** grafo = NULL;
-    bool* agm = new bool[5];
-    for(int d=0; d<5; d++)
-        agm[d]=false;
 
     //Imprimindo cabeçalho de apresentação.
     printf("Projeto #4 - YODA\n"
@@ -972,15 +979,21 @@ int main()
         //Se nenhum grafo estiver carregado.
         if(!grafo)
         {
+            //Obter resposta através do menu inicial.
             c=MenuInicial();
 
+            //Se o usuário escolher carregar um grafo.
             if(c==CM_CARREGAR)
             {
                 printf("\n");
+
+                //Obter quais grafos devem ser carregados.
                 c=MenuCarregar();
 
+                //Se o usuário não optar por voltar ao menu anterior.
                 if(c!=CM_SAIR)
                 {
+                    //Carregar grafos especificados.
                     CarregarGrafo(grafo, c);
                     printf("\n");
                 }
@@ -992,64 +1005,95 @@ int main()
         //Ou se existir pelo menos um grafo carregado.
         else
         {
+            //Obter opção do menu desejada.
             c=MenuPrincipal();
 
             switch(c)
             {
+            //Caso executar algoritmo de Kruskal.
             case CM_AGM:
+                //Obter em quais grafos ele deve ser executado.
                 c=MenuExecutar("executar o algoritmo de Kruskal em", "Calcular");
+
+                //Se o usuário não cancelar a operação.
                 if(c!=CM_SAIR)
                 {
+                    //Executar algoritmo de Kruskal para todos os grafos especificados.
                     ExecutarAlgoritmoKruskal(grafo, c);
                     printf("\n");
                 }
                 else c=CM_DESCONHECIDO;
                 break;
 
+            //Caso calcular o centro da AGM.
             case CM_CENTRO:
+                //Obter em quais grafos ele deve ser executado.
                 c=MenuExecutar("determinar o centro da Arvore Geradora Minima de", "Calcular");
+
+                //Se o usuário não cancelar a operação.
                 if(c!=CM_SAIR)
                 {
+                    //Calcular o centro da AGM dos grafos selecionados.
                     ExecutarAlgoritmoCentro(grafo, c);
                     printf("\n");
                 }
                 else c=CM_DESCONHECIDO;
                 break;
 
+            //Caso executar o algoritmo de Dijkstra.
             case CM_DIJKSTRA:
+                //Obter em quais grafos ele deve ser executado.
                 c=MenuExecutar("executar o algoritmo de Dijkstra em", "Calcular");
+
+                //Se o usuário não cancelar a operação.
                 if(c!=CM_SAIR)
                 {
+                    //Executar o algoritmo de Dijkstra nos grafos especificados.
                     ExecutarAlgoritmoDijkstra(grafo, c);
                     printf("\n");
                 }
                 else c=CM_DESCONHECIDO;
                 break;
 
+            //Caso imprimir um grafo.
             case CM_IMPRIMIR:
+                //Obter quais grafos devem ser imprimidos.
                 c=MenuExecutar("imprimir", "Imprimir");
+
+                //Se o usuário não cancelar a operação.
                 if(c!=CM_SAIR)
                 {
+                    //Imprimir grafos selecionados.
                     ImprimirGalaxias(grafo, c);
                     printf("\n");
                 }
                 else c=CM_DESCONHECIDO;
                 break;
 
+            //Caso carregar um grafo.
             case CM_CARREGAR:
+                //Listar ao usuário os arquivos e armazenar sua escolha.
                 c=MenuCarregar();
+
+                //Se o usuário não cancelar a operação.
                 if(c!=CM_SAIR)
                 {
+                    //Carregar os arquivos escolhidos.
                     CarregarGrafo(grafo, c);
                     printf("\n");
                 }
                 else c=CM_DESCONHECIDO;
                 break;
 
+            //Caso descarregar um grafo.
             case CM_DESCARREGAR:
+                //Obter quais grafos devem ser descarregados.
                 c=MenuExecutar("descarregar", "Descarregar");
+
+                //Se o usuário não cancelar a operação.
                 if(c!=CM_SAIR)
                 {
+                    //Descarregar os grafos especificados.
                     DescarregarGrafo(grafo, c);
                     printf("\n");
                 }

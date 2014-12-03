@@ -13,16 +13,18 @@
 
 bool Heap::Vertice::operator<(Heap::Vertice outro)
 {
-    if(this->p > outro.p)
-        return true;
-    return false;
+    //Retorna se o peso de this é MAIOR (não menor) que o de outro.
+    return(this->p > outro.p);
 }
 
 Heap::Heap(Grafo::Vertice* vertices, int n)
 {
     heap = new std::vector<Vertice>;
 
+    //Reservar espaço no heap.
     heap->reserve(n);
+
+    //Adicionar vértices e pesos ao heap.
     for(int c=0;c<n;c++)
     {
         heap->push_back({vertices[c].peso, c});
@@ -41,6 +43,7 @@ int Heap::RetirarMinimo()
     int minimo=-1;
     if(!heap->empty())
     {
+        //Remover valor mínimo do heap.
         std::pop_heap(heap->begin(), heap->end());
         minimo = heap->back().v;
         heap->pop_back();
@@ -49,10 +52,12 @@ int Heap::RetirarMinimo()
 }
 void Heap::AtualizarVertice(int v, int novo)
 {
+    //Procurar pelo vértice v
     for(std::vector<Vertice>::iterator it = heap->begin(); it!=heap->end(); it++)
     {
         if(it->v == v)
         {
+            //Alterar o peso de v e reconstruir o heap.
             it->p = novo;
             std::make_heap(heap->begin(), heap->end());
             break;
@@ -66,6 +71,9 @@ bool Heap::Vazio()
 
 void Heap::ImprimirEstado()
 {
+    //Imprime colula a coluna o vértice e o seu peso, colocando o símbolo de Infinito caso
+    //o peso tenha o mesmo valor que INT_MAX.
+
     printf("VERTICE\t|PESO\n");
     for(std::vector<Vertice>::iterator it = heap->begin(); it!=heap->end(); it++)
     {

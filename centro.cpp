@@ -28,6 +28,9 @@ void Centro::AdicionarVertice(int v)
 }
 bool Centro::ProximoVertice(int* v)
 {
+    //Iterar pela próxima aresta do vector ou inicializar o iterador
+    // se v == NULL.
+
     static int atual=-1;
     if(c && v)
     {
@@ -100,7 +103,8 @@ int VerticeFolha(int** matriz_adj, int* grau, int n)
 Centro* DeterminarCentro(Grafo* grafo, bool verbose)
 {
     //Elimina folhas da AGM do grafo sistematicamente.
-    //Uma vez que um vértice se isola durante o processo, é seguro assumir que este vértice é central, pois os grafos são direcionados.
+    //Uma vez que um vértice se isola durante o processo,
+    // é seguro assumir que este vértice é central, pois os grafos são direcionados.
 
     Centro* ret=new Centro;
     if(grafo && grafo->a_agm)
@@ -108,6 +112,7 @@ Centro* DeterminarCentro(Grafo* grafo, bool verbose)
         if(verbose)
             printf("Inicializando variáveis.\n");
 
+        //Inicializando variáveis.
         int* grau;
         int** matriz_adj;
         bool* folhas;
@@ -123,6 +128,9 @@ Centro* DeterminarCentro(Grafo* grafo, bool verbose)
 
         if(verbose)
             printf("Criando matriz de adjacencias.\n");
+
+        //Atribuindo valor inicial à matriz de adjacências e vetor de grau,
+        // através vértices da agm do grafo.
         CriarMatrizAdj(grafo, grau, matriz_adj);
 
 
@@ -144,7 +152,10 @@ Centro* DeterminarCentro(Grafo* grafo, bool verbose)
             printf("Processando vertices...\n");
         }
 
+        //Procurando por vértices folha.
         int f=VerticeFolha(matriz_adj, grau, grafo->nv);
+
+        //Enquanto existirem vértices folha
         while(f>-1)
         {
             if(verbose)
@@ -153,7 +164,10 @@ Centro* DeterminarCentro(Grafo* grafo, bool verbose)
             if(verbose)
                 printf("Eliminando vertice da arvore.\nAtualizando matriz de adjacencias e grau dos vertices.\n");
 
+            //Marcar vértice atual como folha.
             folhas[f]=true;
+
+            //Retirar vértice da matriz de adjacências, destruindo suas conexões.
             for(int c=0; c<grafo->nv; c++)
             {
                 if(matriz_adj[f][c]>0)
@@ -163,6 +177,8 @@ Centro* DeterminarCentro(Grafo* grafo, bool verbose)
 
                 grau[c]=0;
             }
+
+            //Recalcular grau dos vértices.
             for(int i=0; i<grafo->nv; i++)
                 for(int j=0; j<grafo->nv; j++)
                 {
@@ -175,12 +191,16 @@ Centro* DeterminarCentro(Grafo* grafo, bool verbose)
 
             if(verbose)
                 printf("Procurando por vertices isolados...\n");
+
+            //Buscar vértices que tem grau zero, mas ainda não foram marcados como folha.
             for(int c=0;c<grafo->nv;c++)
             {
                 if(!grau[c] && !folhas[c])
                 {
                     if(verbose)
                         printf("Vertice isolado encontrado: %d.\nAdicionando %d a lista de vertices centrais.\n", c, c);
+
+                    //Adicionar vértice isolado ao conjunto de vértices centrais e marcá-lo como folha.
                     ret->AdicionarVertice(c);
                     folhas[c]=true;
                 }
@@ -188,6 +208,7 @@ Centro* DeterminarCentro(Grafo* grafo, bool verbose)
             if(verbose)
                 printf("\n");
 
+            //Buscar pelo próximo vértice folha e iterar novamente.
             f=VerticeFolha(matriz_adj, grau, grafo->nv);
         }
         return ret;
