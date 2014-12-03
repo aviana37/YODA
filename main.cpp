@@ -60,7 +60,7 @@
     \brief Referência a todos os grafos, mas sem verbose.
 
     \var CM_AGM,
-    \brief Executar algoritmo do Kruskal.
+    \brief Executar algoritmo de Kruskal.
     \var CM_DIJKSTRA,
     \brief Executar algoritmo de Dijkstra.
     \var CM_CENTRO,
