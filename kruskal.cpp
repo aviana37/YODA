@@ -51,7 +51,7 @@ void Kruskal(Grafo* &grafo, bool verbose)
                     printf("Aresta e minima, e nao forma ciclo.\n"
                            "Adicionando aresta a arvore geradora minima.\n");
             }
-            else
+            else if(verbose)
                 printf("Aresta forma ciclo.\n");
 
             //Se a AGM já tem N_Vértices-1 arestas, finalizar o loop.

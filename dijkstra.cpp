@@ -20,7 +20,7 @@ void Dijkstra(Grafo* &grafo, bool verbose)
         if(grafo->a_agm)
         {
             delete grafo->a_agm;
-            grafo->a_agm;
+            grafo->a_agm = NULL;
         }
 
         if(verbose)

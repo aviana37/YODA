@@ -38,7 +38,6 @@ void CriarMatrizAdj(Grafo* grafo, int* grau, int** matriz_adj)
 
     if(grafo)
     {
-        printf("Arestas AGM %d.\n", grafo->a_agm->size());
         Grafo::Aresta buff;
 
         for(int i=0; i<grafo->nv; i++)
