@@ -1,3 +1,137 @@
+/*André Viana Sena de Souza - 25037
+**Projeto e Análise de Algoritmos - ECO027
+**Projeto #4 - YODA - 03/12/2014
+**Arquivo: main.cpp
+**Descrição: Interface e gerenciamento de recursos do programa.
+*/
+
+/** \mainpage notitle
+    \section Projeto_e_Análise_de_Algoritmos_-_ECO027
+    André Viana Sena de Souza - 25037
+
+    Bem-vindo!
+
+    >><a href="files.html" target="_blank"><b>LISTA DE ARQUIVOS</b></a>
+
+    >><a href="../../Relatório.pdf" target="_blank"><b>RELATÓRIO</b></a>
+
+    >><a href="http://github.com/zanv/YODA" target="_blank"><b>REPOSITÓRIO</b></a>
+*/
+
+/** \file main.cpp
+    \brief Interface e gerenciamento de recursos do programa.
+
+    \def GALAXIA_100txt Endereço do arquivo do grafo de 100 vértices.
+    \def GALAXIA_50txt Endereço do arquivo do grafo de 50 vértices.
+    \def GALAXIA_20txt Endereço do arquivo do grafo de 20 vértices.
+    \def GALAXIA_10txt Endereço do arquivo do grafo de 10 vértices.
+    \def GALAXIA_5txt Endereço do arquivo do grafo de 5 vértices.
+
+    \enum GALAXIA
+    \brief Utilizada para acessar os membros do vetor de grafos.
+
+    \enum COMANDO_MENU
+    \brief Descreve todos os possíveis comportamentos que os menus podem obter do usuário.
+
+    \var CM_DESCONHECIDO
+    \brief Comando desconhecido
+    \var CM_SAIR
+    \brief Sair do menu.
+    \var CM_IMPRIMIR
+    \brief Imprimir grafos.
+    \var CM_CARREGAR
+    \brief Carregar grafos.
+    \var CM_DESCARREGAR
+    \brief Descarregar grafos.
+
+    \var CM_GALAXIA_100
+    \brief Referência ao grafo Galáxia 100.
+    \var CM_GALAXIA_10
+    \brief Referência ao grafo Galáxia 10.
+    \var CM_GALAXIA_20
+    \brief Referência ao grafo Galáxia 20.
+    \var CM_GALAXIA_50
+    \brief Referência ao grafo Galáxia 50.
+    \var CM_GALAXIA_5
+    \brief Referência ao grafo Galáxia 5.
+    \var CM_TODOS
+    \brief Referência a todos os grafos.
+    \var CM_TODOS_SEM_VERBOSE
+    \brief Referência a todos os grafos, mas sem verbose.
+
+    \var CM_AGM,
+    \brief Executar algoritmo do Kruskal.
+    \var CM_DIJKSTRA,
+    \brief Executar algoritmo de Dijkstra.
+    \var CM_CENTRO,
+    \brief Calcular o centro da Árvore Geradora Mínima.
+
+    \fn COMANDO_MENU MenuInicial();
+    \brief Pergunta ao usuário se ele deseja carregar um grafo ou sair do programa.
+    \return CM_SAIR
+    \return CM_CARREGAR
+
+    \fn COMANDO_MENU MenuCarregar();
+    \brief Lista os arquivos e pede que o usuário escolha qual arquivo deve ser carregado.
+    \return CM_GALAXIA_100,
+    \return CM_GALAXIA_10,
+    \return CM_GALAXIA_20,
+    \return CM_GALAXIA_50,
+    \return CM_GALAXIA_5,
+    \return CM_TODOS,
+
+    \fn COMANDO_MENU MenuPrincipal();
+    \brief Oferece todas as opções disponíveis ao usuário.
+    \details Tais como executar algoritmos, imprimir, carregar, ou descarregar grafos, e sair.
+    \return CM_SAIR,
+    \return CM_IMPRIMIR,
+    \return CM_CARREGAR,
+    \return CM_DESCARREGAR,
+    \return CM_AGM,
+    \return CM_DIJKSTRA,
+    \return CM_CENTRO,
+
+    \fn COMANDO_MENU MenuExecutar(const char*, const char*);
+    \brief Menu com texto personalizável. Completa os diálogos a partir das strings dadas como parâmetro.
+    \details Título do menu: "Deseja (TAREFA) qual(is) grafo(s)?".\n
+             Opções: "N-(VERBO) no grafo N.".
+    \return CM_GALAXIA_100,
+    \return CM_GALAXIA_10,
+    \return CM_GALAXIA_20,
+    \return CM_GALAXIA_50,
+    \return CM_GALAXIA_5,
+    \return CM_TODOS,
+    \return CM_TODOS_SEM_VERBOSE,
+
+    \fn void ExecutarAlgoritmoKruskal(Grafo**&, COMANDO_MENU);
+    \brief Executa o algoritmo de Kruskal no(s) grafo(s) especificado(s), se carregado(s).
+    \details Por default, a variável verbose tem valor true.\n
+    Esse valor só será alterado se o comando especificado for CM\_TODOS\_SEM\_VERBOSE.
+
+    \fn void ExecutarAlgoritmoDijkstra(Grafo**&, COMANDO_MENU);
+    \brief Executa o algoritmo de Dijkstra no(s) grafo(s) especificado(s), se carregado(s).
+    \details Por default, a variável verbose tem valor true.\n
+    Esse valor só será alterado se o comando especificado for CM\_TODOS\_SEM\_VERBOSE.
+
+    \fn void ExecutarAlgoritmoCentro(Grafo**, COMANDO_MENU);
+    \brief Calcula o centro da AGM no(s) grafo(s) especificado(s), se carregado(s).
+    \details Por default, a variável verbose tem valor true.\n
+    Esse valor só será alterado se o comando especificado for CM\_TODOS\_SEM\_VERBOSE.\n
+    No final da execução do algoritmo, o resultado é sempre impresso.
+
+    \fn void DescarregarGrafo(Grafo**&, COMANDO_MENU);
+    \brief Descarrega o(s) grafo(s) especificado(s).
+    \details Lê CM\_TODOS\_SEM\_VERBOSE como CM\_TODOS.
+    \fn void CarregarGrafo(Grafo**&, COMANDO_MENU);
+    \brief Carrega o(s) grafo(s) especificado(s).
+    \details Lê CM\_TODOS\_SEM\_VERBOSE como CM\_TODOS.
+
+    \fn void ImprimirGalaxias(Grafo**, COMANDO_MENU);
+    \brief Chama a função ImprimirGrafo(Grafo*) para todos os grafos especificados, se carregados.
+    \fn int main();
+    \brief Instancia o vetor de ponteiros de Grafo e delega as operações selecionadas pelo usuário para os respectivos métodos.
+*/
+
 #include "grafo.h"
 #include "kruskal.h"
 #include "dijkstra.h"

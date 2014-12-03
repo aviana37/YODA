@@ -1,5 +1,16 @@
 #include "grafo.h"
 
+/*André Viana Sena de Souza - 25037
+**Projeto e Análise de Algoritmos - ECO027
+**Projeto #4 - YODA - 03/12/2014
+**Arquivo: grafo.cpp
+**Descrição: Implementação do cabeçalho grafo.h.
+*/
+
+/** \file grafo.cpp
+    \brief Implementações de grafo.h.
+*/
+
 int Grafo::Aresta::Comparador(const void* a, const void* b)
 {
     Aresta* aa = (Aresta*) a;

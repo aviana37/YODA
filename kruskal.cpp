@@ -1,5 +1,16 @@
 #include "kruskal.h"
 
+/*André Viana Sena de Souza - 25037
+**Projeto e Análise de Algoritmos - ECO027
+**Projeto #4 - YODA - 03/12/2014
+**Arquivo: kruskal.cpp
+**Descrição: Implementação do algoritmo de Kruskal.
+*/
+
+ /** \file kruskal.cpp
+     \brief Implementação do algoritmo de Kruskal.
+*/
+
 void Kruskal(Grafo* &grafo, bool verbose)
 {
     if(grafo)

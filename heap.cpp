@@ -1,5 +1,16 @@
 #include "heap.h"
 
+/*André Viana Sena de Souza - 25037
+**Projeto e Análise de Algoritmos - ECO027
+**Projeto #4 - YODA - 03/12/2014
+**Arquivo: heap.cpp
+**Descrição: Implementação da classe Heap.
+*/
+
+/** \file heap.cpp
+    \brief Implementação da classe Heap.
+*/
+
 bool Heap::Vertice::operator<(Heap::Vertice outro)
 {
     if(this->p > outro.p)

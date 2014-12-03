@@ -1,5 +1,16 @@
 #include "centro.h"
 
+/*André Viana Sena de Souza - 25037
+**Projeto e Análise de Algoritmos - ECO027
+**Projeto #4 - YODA - 03/12/2014
+**Arquivo: centro.cpp
+**Descrição: Implementação do cabeçalho centro.h.
+*/
+
+/** \file centro.cpp
+    \brief Implementação de centro.h
+*/
+
 Centro::Centro()
 {
     c=NULL;

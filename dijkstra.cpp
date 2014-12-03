@@ -1,5 +1,17 @@
 #include "dijkstra.h"
 
+/*André Viana Sena de Souza - 25037
+**Projeto e Análise de Algoritmos - ECO027
+**Projeto #4 - YODA - 03/12/2014
+**Arquivo: dijkstra.h
+**Descrição: Implementação do algoritmo de Dijkstra.
+*/
+
+/**
+    \file dijkstra.cpp
+    \brief Implementação do algoritmo de Dijkstra.
+*/
+
 void Dijkstra(Grafo* &grafo, bool verbose)
 {
     if(grafo)
