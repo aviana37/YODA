@@ -222,7 +222,7 @@ void ExecutarAlgoritmoKruskal(Grafo** &g, COMANDO_MENU qual)
             printf("Executando algoritmo de Kruskal no grafo Galaxia 5.\n");
             IniciarCronometro();
             Kruskal(g[GALAXIA_5], verbose);
-            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+            printf("Pronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 5 nao esta carregado.\n");
@@ -234,7 +234,7 @@ void ExecutarAlgoritmoKruskal(Grafo** &g, COMANDO_MENU qual)
             printf("Executando algoritmo de Kruskal no grafo Galaxia 10.\n");
             IniciarCronometro();
             Kruskal(g[GALAXIA_10], verbose);
-            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+            printf("Pronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 10 nao esta carregado.\n");
@@ -246,7 +246,7 @@ void ExecutarAlgoritmoKruskal(Grafo** &g, COMANDO_MENU qual)
             printf("Executando algoritmo de Kruskal no grafo Galaxia 20.\n");
             IniciarCronometro();
             Kruskal(g[GALAXIA_20], verbose);
-            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+            printf("Pronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 20 nao esta carregado.\n");
@@ -258,7 +258,7 @@ void ExecutarAlgoritmoKruskal(Grafo** &g, COMANDO_MENU qual)
             printf("Executando algoritmo de Kruskal no grafo Galaxia 50.\n");
             IniciarCronometro();
             Kruskal(g[GALAXIA_50], verbose);
-            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+            printf("Pronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 50 nao esta carregado.\n");
@@ -270,7 +270,7 @@ void ExecutarAlgoritmoKruskal(Grafo** &g, COMANDO_MENU qual)
             printf("Executando algoritmo de Kruskal no grafo Galaxia 100.\n");
             IniciarCronometro();
             Kruskal(g[GALAXIA_100], verbose);
-            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+            printf("Pronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 100 nao esta carregado.\n");
@@ -299,7 +299,7 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
             printf("Executando algoritmo de Dijkstra no grafo Galaxia 5.\n");
             IniciarCronometro();
             Dijkstra(g[GALAXIA_5], verbose);
-            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+            printf("Pronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 5 nao esta carregado.\n");
@@ -311,7 +311,7 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
             printf("Executando algoritmo de Dijkstra no grafo Galaxia 10.\n");
             IniciarCronometro();
             Dijkstra(g[GALAXIA_10], verbose);
-            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+            printf("Pronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 10 nao esta carregado.\n");
@@ -323,7 +323,7 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
             printf("Executando algoritmo de Dijkstra no grafo Galaxia 20.\n");
             IniciarCronometro();
             Dijkstra(g[GALAXIA_20], verbose);
-            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+            printf("Pronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 20 nao esta carregado.\n");
@@ -335,7 +335,7 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
             printf("Executando algoritmo de Dijkstra no grafo Galaxia 50.\n");
             IniciarCronometro();
             Dijkstra(g[GALAXIA_50], verbose);
-            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+            printf("Pronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 50 nao esta carregado.\n");
@@ -347,7 +347,7 @@ void ExecutarAlgoritmoDijkstra(Grafo** &g, COMANDO_MENU qual)
             printf("Executando algoritmo de Dijkstra no grafo Galaxia 100.\n");
             IniciarCronometro();
             Dijkstra(g[GALAXIA_100], verbose);
-            printf("Pronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+            printf("Pronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
         }
         else
             printf("Grafo Galaxia 100 nao esta carregado.\n");
@@ -385,7 +385,7 @@ void ExecutarAlgoritmoCentro(Grafo** g, COMANDO_MENU qual)
                 while(c->ProximoVertice(&e))
                     printf("%d ", e);
 
-                printf("\nPronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+                printf("\nPronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
                 delete c;
             }
             else
@@ -411,7 +411,7 @@ void ExecutarAlgoritmoCentro(Grafo** g, COMANDO_MENU qual)
                 while(c->ProximoVertice(&e))
                     printf("%d ", e);
 
-                printf("\nPronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+                printf("\nPronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
                 delete c;
             }
             else
@@ -437,7 +437,7 @@ void ExecutarAlgoritmoCentro(Grafo** g, COMANDO_MENU qual)
                 while(c->ProximoVertice(&e))
                     printf("%d ", e);
 
-                printf("\nPronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+                printf("\nPronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
                 delete c;
             }
             else
@@ -463,7 +463,7 @@ void ExecutarAlgoritmoCentro(Grafo** g, COMANDO_MENU qual)
                 while(c->ProximoVertice(&e))
                     printf("%d ", e);
 
-                printf("\nPronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+                printf("\nPronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
                 delete c;
             }
             else
@@ -489,7 +489,7 @@ void ExecutarAlgoritmoCentro(Grafo** g, COMANDO_MENU qual)
                 while(c->ProximoVertice(&e))
                     printf("%d ", e);
 
-                printf("\nPronto.\nTempo de execucao: %.3fms.\n\n", TerminarCronometro());
+                printf("\nPronto.\nTempo de execucao: %.3fs.\n\n", TerminarCronometro());
                 delete c;
             }
             else
