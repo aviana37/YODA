@@ -13,9 +13,7 @@ private:
         int p, v;
         bool operator<(Heap::Vertice outro);
     };
-
     std::vector<Vertice>* heap;
-    int n;
 
 public:
     Heap(Grafo::Vertice* vertices, int n);

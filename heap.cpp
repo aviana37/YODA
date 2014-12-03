@@ -9,7 +9,6 @@ bool Heap::Vertice::operator<(Heap::Vertice outro)
 
 Heap::Heap(Grafo::Vertice* vertices, int n)
 {
-    this->n = n;
     heap = new std::vector<Vertice>;
 
     heap->reserve(n);

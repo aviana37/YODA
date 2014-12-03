@@ -29,7 +29,7 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Wall" />
+			<Add option="-w" />
 		</Compiler>
 		<Unit filename="centro.cpp" />
 		<Unit filename="centro.h" />
